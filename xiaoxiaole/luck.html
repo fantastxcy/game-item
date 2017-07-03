@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=750,target-densitydpi=375, user-scalable=no">
+	<title>银联消消乐</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+	<!-- 页面 -->
+	<section class="bg4 center"></section>
+	<section class="luck center">
+		<div class="dishBg center">
+			<div class="dish center"></div>
+			<a href="javascript:;" class="dishStart center"></a>
+		</div>
+	</section>
+	<!-- 遮盖层 -->
+
+	<section class="shade center"></section>
+	<!-- 弹窗 -->
+	<section class="win failWin ycenter">
+		<p>您还没有获得抽奖机会哦！</p>
+		<a href="javascript:;" class="winBtn failWinBtn center">返回</a>
+	</section>
+	<!-- 中奖 -->
+	<section class="win luckWin ycenter">
+		<h3>恭喜你！</h3>
+		<p class="luckWinP">获得<span class="prize"></span><br />请输入信息进行领奖</p>
+		<div class="luckDiv fixed">
+			<label>姓名</label>
+			<input type="text" maxlength="10" class="name" />
+		</div>
+		<div class="luckDiv fixed">
+			<label>电话</label>
+			<input type="tel" maxlength="11" class="tel" />
+		</div>
+		<p class="luckWinTips">*请准确填写信息，否则将影响奖品发放</p>
+		<a href="javascript:;" class="winBtn luckWinBtn center">提交</a>
+	</section>
+	<!-- 提交成功 -->
+	<section class="win luckSucWin ycenter">
+		<h3>提交成功</h3>
+		<p>奖品将在活动结束后<br />15个工作日内发放</p>
+		<a href="javascript:;" class="winBtn luckSucWinBtn center">返回</a>
+	</section>
+	<!-- 提交成功 -->
+	<section class="win luckFailWin ycenter">
+		<h3>提交失败</h3>
+		<p>请重新提交表单</p>
+		<a href="javascript:;" class="winBtn luckFailWinBtn center">返回</a>
+	</section>
+	<!-- 未中奖 -->
+	<section class="win unluckWin ycenter">
+		<h3>很遗憾，没有中奖</h3>
+		<p>继续玩游戏赢取抽奖机会吧</p>
+		<a href="javascript:;" class="winBtn unluckWinBtn center">返回</a>
+	</section>
+    <script type="text/javascript">
+    	var num=1;//是否有抽奖机会
+		var point=0;//转盘转动角度
+		var prize;//奖品
+    	//抽奖
+    	var sub=false;//防止重复点击
+		$(".dishStart").on("click",function(){
+			if(sub==true){return false;}
+			if(sub==false){
+				sub=true;
+				if(num>0){
+					prize=2;
+					// prize=parseInt(Math.random()*3);//0未中奖 1为10话费,2为50话费,3为100购物券，4为500购物券
+					luck(prize);
+					point+=3600;
+					$(".dish").css({"-webkit-transform":"rotate("+point+"deg)"});
+					setTimeout(function(){
+						sub=false;
+						if(prize>=1&&prize<=4){
+							$(".shade").fadeIn(300);
+							$(".luckWin").fadeIn(300);
+							return;
+						}else{
+							$(".shade").fadeIn(300);
+							$(".unluckWin").fadeIn(300);
+							return;
+						}
+					},5000);
+				}else{
+					$(".shade").fadeIn(300);
+					$(".failWin").fadeIn(300);
+				}
+			}
+    		
+    	});
+
+		
+    	function luck(x){
+  			switch(x){
+  				case 0:point+=0;
+  				break;
+  				case 1:point+=120;$(".prize").text("10元话费");
+  				break;
+  				case 2:point+=240;$(".prize").text("50元话费");
+  				break;
+  				case 3:point+=300;$(".prize").text("100购物卡");
+  				break;
+  				case 4:point+=60;$(".prize").text("500购物卡");
+  				break;
+  			}
+  		}
+
+  		// 提交表单
+  		$(".luckWinBtn").on("click",function(){
+  			var name=$(".name").val();
+  			var tel=$(".tel").val();
+  			var telReg = !!tel.match(/^\d{11}$/);
+			if(name==""||tel==""){
+				alert("信息填写不完整，请重新输入！");
+			}else if(telReg==false){
+				alert("手机号码输入不正确，请重新输入！");
+			}else{
+				var isSuc=true;//是否提交成功
+				if(isSuc==true){
+					$(".luckWin").fadeOut(300);
+					$(".luckSucWin").fadeIn(300);
+					//此处把name tel值传入数据库
+				}else{
+					$(".luckWin").fadeOut(300);
+					$(".luckFailWin").fadeIn(300);
+				}
+				
+			}
+  		});
+  		//提交失败
+  		$(".luckFailWinBtn").on("click",function(){
+  			$(".luckWin").fadeIn();
+			$(".luckFailWin").fadeOut();
+  		});
+  		//返回首页
+  		$(".luckSucWinBtn,.unluckWinBtn,.failWinBtn").on("click",function(){
+  			window.location.href="index.html";
+  		})
+	</script>
+</body>
+</html>

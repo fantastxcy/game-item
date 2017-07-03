@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=750,target-densitydpi=375, user-scalable=no">
+	<title>银联消消乐</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<!-- 首页 -->
+	<section class="bg5 center"></section>
+	<section class="help center">
+		<p class="helpP center">你的好友<span>习近平</span><br />在银联“属我最6”活动中能量耗尽<br />向你发出求助！</p>
+        <div class="helpBtn center">
+            <a href="javascript:;" class="helpBtn1"><img src="images/btn4.png" /></a>
+            <a href="javascript:;" class="helpBtn2"><img src="images/btn5.png" /></a>
+        </div>
+       
+	</section>
+	<section class="shade"></section>
+    <!-- 弹窗 -->
+    <section class="win helpWin ycenter">
+        <h3></h3>
+        <p></p>
+        <a href="javascript:;" class="winBtn helpWinBtn center">前往查看</a>
+    </section>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+    	var isHelp=false;//是否已经助力
+        var isFull=false;//助力是否已满
+
+        // 点击助力
+        $(".helpBtn1").on("click",function(){
+            $(".shade").fadeIn(300);
+            $(".helpWin").fadeIn(300);
+            if(isHelp==true){
+                $(".helpWin h3").html("今天已经救过TA了！");
+                $(".helpWin p").html("不如你也来挑战大奖吧！");
+                return;
+            }
+            if(isFull==true){
+                $(".helpWin h3").html("TA能量已满");
+                $(".helpWin p").html("不如你也来挑战大奖吧！");
+                return;
+            }
+            $(".helpWin h3").css("color","#0fa3f3").html("赐予成功");
+            $(".helpWin p").html("一起来挑战大奖吧");
+            // 次数+1
+        });
+
+        // 也要挑战
+        $(".helpBtn2").on("click",function(){
+            window.location.href="index.html";
+        });
+
+        // 前往查看
+        $(".helpWinBtn").on("click",function(){
+            window.location.href="index.html";
+        });
+	</script>
+</body>
+</html>

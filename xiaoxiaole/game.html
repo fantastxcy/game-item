@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=750,target-densitydpi=375, user-scalable=no">
+	<title>银联消消乐</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#a6e3ff;">
+	<div style="width:750px;height:100%;position:fixed;">
+
+	
+	<audio id="music">
+		<source src="images/music.mp3" type="audio/mpeg" />
+	</audio>
+	<section class="bg3 center"></section>
+	<section class="game center">
+		<div class="musicIcon"></div>
+		<div class="gameTop center">
+			<div class="timeBar">
+				<div class="bar"></div>
+			</div>
+			<span class="gameTime">30</span>
+		</div>
+		<div class="gameFont center">
+			<div class="colBg"><img src="images/col1-1.png" /></div>
+			<div class="colBg"><img src="images/col2-1.png" /></div>
+			<div class="colBg"><img src="images/col3-1.png" /></div>
+			<div class="colBg"><img src="images/col4-1.png" /></div>
+			<div class="colBg"><img src="images/col5-1.png" /></div>
+		</div>
+		<div class="gameBg center">
+			<div class="gameCon center">
+
+			</div>
+		</div>
+		<a href="javascript:;" class="quick center"></a>
+	</section>
+	<section class="phone"></section>
+	<section class="success center">
+		<img src="images/suc.png" class="ycenter"/>
+	</section>
+	<section class="shade center" style="display:block;"></section>
+	<section class="ready center">
+		<img class="readyPic" src="images/ready.png" />
+		<p class="readyP"><img src="images/click.png" />2个以上相连的同色魔法石可消除<br />（含数字），成功集齐5个数字，<br />即闯关成功！</p>
+		<img class="readyPic2" src="images/quick.png" />
+		<p class="readyP2">点击道具“云闪付”，<br />可将剩余的魔法石重新排列，<br />每局游戏仅有一次使用机会哦！</p>
+		<a href="javascript:;" class="gameStart"><img src="images/btn1.png" /></a>
+	</section>
+	<section class="win timeOverWin ycenter">
+		<p>很遗憾，时间到了！<br />再来一次吧！</p>
+		<a href="javascript:;" class="winBtn timeOverWinBtn center">返回</a>
+	</section>
+	<section class="win sucWin ycenter">
+		<h3>棒棒哒！</h3>
+		<p>成功集齐95516<br />可以召唤UP弟和UP妹送大奖啦<br />快去试试手气吧！</p>
+		<a href="javascript:;" class="winBtn sucWinBtn center">去抽奖</a>
+	</section>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript">
+    	var st,sb;
+    	$(function(){
+    		$("#music")[0].pause();
+    	})
+    	//开始游戏
+    	var sub=false;
+    	$(".gameStart").on("click",function(){
+    		if(sub==false){
+    			sub=true;
+    			$(".shade").fadeOut(300);
+    			$(".ready").fadeOut(300);
+    			setTimeout(function(){
+    				timeFuc();
+    			},300);
+    		}
+    	});
+    	//倒计时
+    	function timeFuc(){
+    		st=setInterval(function(){
+    			var gameTime=parseInt($(".gameTime").text());
+	    		gameTime--;
+	    		$(".gameTime").text(gameTime);
+	    		if(gameTime<=0){
+	    			clearInterval(st);
+	    			$(".shade").fadeIn(300);
+	    			$(".timeOverWin").fadeIn(300);
+	    		}
+    		},1000)
+    		$(".bar").animate({"width":"86px"},30000);
+    	}
+
+    	// 返回
+    	$(".timeOverWinBtn").on("click",function(){
+    		window.location.href="index.html";
+    	});
+    	// 去抽奖
+    	$(".sucWinBtn").on("click",function(){
+    		window.location.href="luck.html";
+    	});
+    	//点击音乐按钮
+    	$(".musicIcon").on("click",function(){
+    		$(".musicIcon").removeClass("round");
+    		$("#music")[0].pause();
+    	});
+	</script>
+</body>
+</html>

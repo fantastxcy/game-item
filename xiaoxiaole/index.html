@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=750,target-densitydpi=375, user-scalable=no">
+	<title>银联消消乐</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<!-- 首页 -->
+	<section class="bg1 center"></section>
+	<section class="index center">
+		<div class="theme center"></div>
+		<div class="logo absolute"></div>
+		<div class="cardNum center">
+			<img src="images/indexPic2.png" class="cardTit" />
+			<img src="images/card0.png" class="cardImg" />
+			<img src="images/card0.png" class="cardImg" />
+			<img src="images/card0.png" class="cardImg" />
+		</div>
+		<div class="indexBtn center">
+			<a href="javascript:;" class="indexBtn1"><img src="images/btn1.png" /></a>
+			<a href="javascript:;" class="indexBtn2"><img src="images/btn2.png" /></a>
+		</div>
+		<a href="rule.html" class="indexBtn3 center">游戏规则</a>
+	</section>
+	<section class="shade center"></section>
+	<!-- 分享 -->
+	<section class="share center">
+		<img src="images/share.png" />
+        <p>独乐乐不如众乐乐</p>
+	</section>
+
+	<!-- 弹窗 -->
+	<section class="win indexWin ycenter">
+        <h3>能量用完了</h3>
+		<p>召唤小伙伴给你注入能量！</p>
+		<a href="javascript:;" class="winBtn indexWinBtn center">确定</a>
+	</section>
+
+
+	<!--加载页-->
+	<div class="center" id="loading" style="display:none;">  
+          <div class="loadIcon center">
+              <img src="images/loading.gif" class="loadZ" alt=""/>
+          </div>   
+    </div>
+
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+    <script type="text/javascript">
+    	var cardNum=2;//剩余游戏次数
+    	$(function(){
+    		for(var i=0;i<cardNum;i++){
+    			$(".cardImg").eq(i).attr("src","images/card1.png");
+    		}
+    	});
+
+    	//开始游戏
+    	var sub=false;//防止多次点击
+    	$(".indexBtn1").on("click",function(){
+    		if(sub==true){
+    			return false;
+    		}
+    		if(cardNum==0){
+    			$(".shade").fadeIn(300);
+    			$(".indexWin").fadeIn(300);
+    			return false;
+    		}
+    		sub=true;
+    		cardNum--;//入库
+    		window.location.href="game.html";
+    	});
+
+    	//没有能力
+    	$(".indexWinBtn").on("click",function(){
+            $(".indexWin").fadeOut(300);
+    		$(".share").fadeIn(300);
+            share();
+    	});
+
+    	//分享
+    	$(".indexBtn2").on("click",function(){
+    		$(".shade").fadeIn(300);
+    		$(".share").fadeIn(300);
+            share();
+    	});
+    	$(".share").on("click",function(){
+    		$(".shade").fadeOut(300);
+    		$(".share").fadeOut(300);
+    	});
+        function share(){
+            shareT=setInterval(function(){
+                var shareImg=$(".share img").attr("src");
+                if(shareImg=="images/share.png"){
+                    $(".share img").attr("src","images/share2.png");
+                }else{
+                    $(".share img").attr("src","images/share.png");
+                }
+            },500);
+        }
+	</script>
+</body>
+</html>

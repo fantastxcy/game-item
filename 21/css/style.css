@@ -1,0 +1,112 @@
+body{
+	margin:0;
+	background-color: #b55425;
+	font-family: "微软雅黑";
+	letter-spacing:0px;
+   color: #19277e;
+   font-size: 26px;
+}
+ul,li,a,h1,h2,h3,h4,h5,h6,p,input,textarea,span{margin: 0;padding: 0;list-style:none;text-decoration: none;box-sizing:content-box;   }
+img{display: block;}
+/*global*/
+.fixed{ 
+   *zoom:1;
+}
+
+.fixed:after{
+   content: ".";
+   height:0;
+   clear:both;
+   overflow: hidden;
+   display: block;
+}
+
+
+ /*首页*/
+.bg{width: 640px;height: 1060px; background: url(../images/indexBg.png) no-repeat; position: absolute;top: 0;left: 0;right: 0; margin: auto;}
+.indexTop{width: 560px;height: 53px; padding: 20px 40px;background: url(../images/indexTop.png);position: absolute;top: 0;left: 0;right: 0;margin: auto;}
+.indexTop .score{;font-size: 30px;color: #de5413;font-weight: 800;float: left;line-height: 53px;}
+.indexTop .prize{;font-size: 30px;color: #de5413;font-weight: 800;float: right;line-height: 53px;}
+
+.indexBtn{width: 640px; position: absolute;top: 700px;left: 0;right: 0; margin: auto;}
+.indexBtn a{display: block;width: 278px;height: 68px;margin: 0 auto 30px;}
+.indexBtn a img{width: 278px;height: 68px;}
+
+ /*游戏*/
+.gameBg{width: 640px;height: 1060px; background: url(../images/gameBg.png) no-repeat; position: absolute;top: 0;left: 0;right: 0; margin: auto;}
+.gameBtn{width: 440px; position: absolute;top: 890px;left: 0;right: 0; margin: 0 auto 30px;}
+.gameBtn a{float: left;width: 180px;height: 80px;margin: 0 20px;}
+.gameBtn a img{width: 180px;height: 80px;}
+.game{width: 640px;position: absolute;top: 0;left: 0; right: 0;margin: auto;}
+.game .score{position: absolute;top: 40px;left: 400px;font-size: 26px;color: #fff;font-weight: 800;}
+.game .cardBox{position: absolute;top: 50px;left: 50px;width: 103px;height: 136px;background: url(../images/cardBox.png);}
+.game .icon{width: 26px;height: 13px;background: url(../images/icon.png) no-repeat;position: absolute;top: 200px;left: 90px;}
+.game .cardBack{opacity:0; width: 72px;height: 105px;position: absolute;top: 49px;left: 70px;z-index: 1000;}
+.card{width: 130px;height: 190px;display: block;position: absolute;display: none;}
+.card img{width: 130px;height: 190px;}
+.game .banker0{top: 170px;left: 250px;}
+.game .banker1{top: 170px;left: 250px;}
+.game .banker2{top: 170px;left: 280px;}
+.game .banker3{top: 170px;left: 310px;}
+.game .banker4{top: 170px;left: 340px;}
+.game .banker5{top: 170px;left: 370px;}
+.game .banker6{top: 170px;left: 400px;}
+.game .banker7{top: 170px;left: 430px;}
+.game .banker8{top: 170px;left: 460px;}
+.game .banker9{top: 170px;left: 490px;}
+.game .banker10{top: 170px;left: 520px;}
+.man{width: 103px;height: 81px;position: absolute;top: 100px;left: 280px;position: absolute;}
+.game .player1{top: 500px;left: 220px;}
+.game .player2{top: 500px;left: 250px;}
+.game .player3{top: 500px;left: 280px;}
+.game .player4{top: 500px;left: 310px;}
+.game .player5{top: 500px;left: 340px;}
+.game .player6{top: 500px;left: 370px;}
+.game .player7{top: 500px;left: 400px;}
+.game .player8{top: 500px;left: 430px;}
+.game .player9{top: 500px;left: 460px;}
+.game .player10{top: 500px;left: 490px;}
+
+.chip{position: absolute;width: 76px;height: 76px;text-align: center;;line-height: 76px;color: #6a3906; background: url(../images/chip.png) no-repeat;}
+.chip1{top: 225px;left: 500px;}
+.chip2{top: 540px;left: 110px;}
+
+.layer{width: 640px;height: 100%;position: fixed;top: 0;right: 0;margin: auto;display: none;}
+
+.shade{width: 640px;height: 100%;position: fixed;background: rgba(0,0,0,0.4);display: none;}
+.window{width: 450px;padding: 25px;border-radius: 10px; top: 150px;display: none; position: relative;margin: auto;background: #fff;}
+.window1 h3{font-size: 26px;color: #6a3906;line-height: 50px;}
+.window p{font-size: 26px;color: #6a3906;line-height: 50px;margin: 0 0 30px;text-align: justify;}
+.window .close{width: 84px;height: 84px;position: absolute;top: -42px;left: 455px;}
+.window .close img{width: 84px;height: 84px;}
+.window2{top: 200px;padding: 35px 25px;}
+.window2 p{font-size: 30px;margin-bottom: 0;}
+.window3{top: 200px;padding: 35px 25px;}
+.window3 .btn{display: block;width: 278px;height: 68px;margin: 20px auto 0;}
+.window3 .btn img{width: 278px;height: 68px;}
+.window3 p{font-size: 30px;margin-bottom: 0;}
+
+.final{width: 640px;height: 1060px;position: absolute;display: none;top: 0;left: 0;right: 0; margin: auto;}
+.win{background: url(../images/win.png);}
+.lose{background: url(../images/lose.png);}
+.draw{background: url(../images/draw.png);}
+.goBtn{width: 265px;height: 69px;display: none;position: absolute;top: 520px;left: 0;right: 0;margin: auto;}
+.goBack{width: 265px;height: 69px;display: none;position: absolute;top: 600px;left: 0;right: 0;margin: auto;}
+
+
+.pTime{display: none;}
+.snum{display: none;opacity: 0; width: 130px;height: 80px;position: absolute;top: 300px;left: 0;right: 0;margin: auto;}
+.snum1{background: url(../images/num1.png) no-repeat;}
+.snum2{background: url(../images/num2.png) no-repeat;}
+.snum3{background: url(../images/num3.png) no-repeat;}
+
+
+
+
+
+
+
+
+
+
+

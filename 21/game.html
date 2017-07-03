@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=640,target-densitydpi=320, user-scalable=no">
+	<title>21点</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	
+
+	<!-- 首页 -->
+	<section class="gameBg"></section>
+	<section class="game">
+		<p class="score">积分余额：<span id="score">0</span></p>
+		<div class="cardBox"></div>
+		<img class="cardBack" src="images/c0.png" alt="" />
+		<span class="icon"></span>
+		<div class="banker">
+			<span class="card banker0"><img src="images/c0.png" alt="" /></span>
+			<span class="card banker1"><img src="images/c1.png" alt="" /></span>
+			<span class="card banker2"><img src="images/c2.png" alt="" /></span>
+			<span class="card banker3"><img src="images/c3.png" alt="" /></span>
+			<span class="card banker4"><img src="images/c4.png" alt="" /></span>
+			<span class="card banker5"><img src="images/c5.png" alt="" /></span>
+			<span class="card banker6"><img src="images/c6.png" alt="" /></span>
+			<span class="card banker7"><img src="images/c7.png" alt="" /></span>
+			<span class="card banker8"><img src="images/c8.png" alt="" /></span>
+			<span class="card banker9"><img src="images/c9.png" alt="" /></span>
+			<span class="card banker10"><img src="images/c10.png" alt="" /></span>
+		</div>
+		<div class="man"><img src="images/man.png" alt="" /></div>
+		<div class="player">
+			<span class="card player1"><img src="images/c11.png" alt="" /></span>
+			<span class="card player2"><img src="images/c12.png" alt="" /></span>
+			<span class="card player3"><img src="images/c13.png" alt="" /></span>
+			<span class="card player4"><img src="images/c14.png" alt="" /></span>
+			<span class="card player5"><img src="images/c15.png" alt="" /></span>
+			<span class="card player6"><img src="images/c16.png" alt="" /></span>
+			<span class="card player7"><img src="images/c17.png" alt="" /></span>
+			<span class="card player8"><img src="images/c18.png" alt="" /></span>
+			<span class="card player9"><img src="images/c19.png" alt="" /></span>
+			<span class="card player10"><img src="images/c20.png" alt="" /></span>
+		</div>
+		
+		<span class="chip chip1">0</span>
+		<span class="chip chip2">0</span>
+	</section>
+	<section class="gameBtn fixed">
+		<a class="btn1" href="javascript:void(0)"><img src="images/gameBtn1.png" alt="" /></a>
+		<a class="btn2" href="javascript:void(0)"><img src="images/gameBtn2.png" alt="" /></a>
+	</section>
+	<section class="layer"></section>
+	<section class="final win"></section>
+	<section class="final lose"></section>
+	<section class="final draw"></section>
+	<a href="javascript:void(0)" class="goBtn"><img src="images/goBtn.png" alt="" /></a>
+	<a href="javascript:void(0)" class="goBack"><img src="images/goBack.png" alt="" /></a>
+	<section class="shade"></section>
+	<section class="window window2">
+		<p>您的当前积小于5分，系统将赠送您5个积分，祝您玩的愉快！点击右上角关闭按钮返回首页</p>
+		<a href="javascript:void(0)" class="close"><img src="images/close.png" alt="" /></a>
+	</section>
+	<section class="window window3">
+		<p>您的当前积分小于5分，请充值后继续游戏！点击右上角关闭按钮返回首页</p>
+		<a href="javascript:void(0)" class="btn"><img src="images/indexBtn3.png" alt="" /></a>
+		<a href="javascript:void(0)" class="close"><img src="images/close.png" alt="" /></a>
+	</section>
+	<div class="snum snum1"></div>
+	<div class="snum snum2"></div>
+	<div class="snum snum3"></div>
+	<span id="pTime">0</span>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	
+	<script type="text/javascript">
+		var cArr=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52];//扑克
+		var chip1=0;
+		var chip2=0;
+		var isScore=0;//0为未赠送过积分，1为已经赠送过积分
+		var score;//玩家总积分
+		var n=0;//点数
+		var bn=0;//庄家点数
+		var pn=0;//玩家点数
+		var cardNum=1;//扑克牌
+		var pTime;
+		var bn1=0;//庄家第一张牌的点数
+		function playerc(){//玩家发牌效果
+			$(".cardBack").animate({"left":"280px","top":"450px","opacity":"1","width":"130px","height":"190px"},500).animate({"opacity":"1",},200).animate({"opacity":"0",},200).animate({"left":"70px","top":"49px","width":"72px","height":"105px"},300);
+		}
+		function bankerc(){//庄家发牌效果
+			$(".cardBack").animate({"left":"280px","top":"170px","opacity":"1","width":"130px","height":"190px"},300).animate({"opacity":"1",},200).animate({"opacity":"0",},200).animate({"left":"70px","top":"49px","width":"72px","height":"105px"},300);
+		}
+		function point(x){
+			if(x<=4&&x>=1){
+				n=1;
+			}else if(x<=8&&x>=5){
+				n=2;
+			}else if(x<=12&&x>=9){
+				n=3;
+			}else if(x<=16&&x>=13){
+				n=4;
+			}else if(x<=20&&x>=17){
+				n=5;
+			}else if(x<=24&&x>=21){
+				n=6;
+			}else if(x<=28&&x>=25){
+				n=7;
+			}else if(x<=32&&x>=29){
+				n=8;
+			}else if(x<=36&&x>=33){
+				n=9;
+			}else if(x<=52&&x>=37){
+				n=10;
+			}
+			return n;
+		}
+		function random1(){//发牌8点及以上几率80%
+			var i=parseInt(Math.random()*100);
+			if(i<15){
+				cardNum=cArr[parseInt(Math.random()*32)];
+				cArr.splice(parseInt(Math.random()*32),1);
+			}else{
+				cardNum1=cArr[cArr.length];
+				cardNum2=cArr[cArr.length-4];
+				cardNum3=cArr[cArr.length-8];
+				var j=parseInt(Math.random()*3+1);
+				if(j==0){cardNum=cardNum1;}
+				if(j==1){cardNum=cardNum2;}
+				if(j==2){cardNum=cardNum3;}
+				cArr.splice(parseInt($.inArray('cardNum',cArr)),1);
+			}
+		}
+		function random2(){//发牌所有点数随机
+			cardNum=cArr[parseInt(Math.random()*cArr.length)];
+			cArr.splice(parseInt(Math.random()*cArr.length),1);
+		}
+		function random3(){//点数当前剩余牌的最小点
+			cardNum=cArr[0];
+			cArr.splice(0,1);
+		}
+		function layerShow(){
+			$(".layer").show();
+		}
+		function layerHide(){
+			$(".layer").hide();
+		}
+		$(window).load(function() {
+			layerShow();
+		});
+		$(window).load(function() {
+			$(".snum3").show();
+			$(".snum3").animate({"opacity":"1"},800).animate({"opacity":"0"},700);
+			setTimeout(function(){
+				$(".snum3").hide();
+			},1500);
+			score=parseInt($("#score").text());
+			score-=5;
+			$("#score").text(score);
+			setTimeout(function(){
+				layerShow();
+				random2();
+				$(".player1>img").attr("src","images/c"+cardNum+".png");
+				playerc();
+				point(cardNum);
+				pn=n;
+			},200);
+			setTimeout(function(){
+				$(".player1").css("display","block");
+				$(".chip2").text(pn);
+			},1400);
+			setTimeout(function(){
+				random1();
+				$(".banker1>img").attr("src","images/c"+cardNum+".png");
+				bankerc();
+				point(cardNum);
+				bn=n;
+				bn1=n;
+			},1600);
+			setTimeout(function(){
+				$(".banker0").css("display","block");
+			},2600);
+			setTimeout(function(){
+				random2();
+				$(".player2>img").attr("src","images/c"+cardNum+".png");
+				playerc();
+				point(cardNum);
+				pn+=n;
+			},2800);
+			setTimeout(function(){
+				$(".player2").css("display","block");
+				$(".chip2").text(pn);
+			},3800);
+			setTimeout(function(){
+				random1();
+				$(".banker2>img").attr("src","images/c"+cardNum+".png");
+				bankerc();
+				point(cardNum);
+				bn+=n;
+			},4000);
+			setTimeout(function(){
+				$(".banker2").css("display","block");
+				$(".chip1").text(bn-bn1);
+				layerHide();
+			},5000);
+			
+		});
+		$(".btn1").click(function(){
+			pTime=parseInt($("#pTime").text());
+			layerShow();
+			if(pTime<8){
+				var cIndex=pTime+3;
+				if(pn>=15&&pn<=21){
+					random1();
+				}else{
+					random2();
+				}
+				$(".player"+cIndex+">img").attr("src","images/c"+cardNum+".png");
+				playerc();
+				point(cardNum);
+				pn+=n;
+				setTimeout(function(){
+					$(".player"+cIndex).css("display","block");
+					$(".chip2").text(pn);
+				},800);
+				if(bn<18){
+					setTimeout(function(){
+						random2();
+						$(".banker"+cIndex+">img").attr("src","images/c"+cardNum+".png");
+						bankerc();
+						setTimeout(function(){
+							$(".banker"+cIndex).css("display","block");
+							$(".chip1").text(bn-bn1);
+							layerHide();
+						},1000);
+						point(cardNum);
+						bn+=n;
+					},1000);
+				}else if(pTime==0){
+					var k=parseInt(Math.random()*10);
+					if(k>=5){//如果庄家当前分数为20点，则有一半几率再加一点
+						setTimeout(function(){
+							random3();
+							$(".banker"+cIndex+">img").attr("src","images/c"+cardNum+".png");
+							bankerc();
+							setTimeout(function(){
+								$(".banker"+cIndex).css("display","block");
+								$(".chip1").text(bn-bn1);
+								layerHide();
+							},1000);
+							point(cardNum);
+							bn+=n;
+						},1000);
+					}else{
+						setTimeout(function(){
+							layerHide();
+						},800);
+					}
+				}else{
+					setTimeout(function(){
+						layerHide();
+					},800);
+				}
+				if(pTime==7){
+					layerHide();
+					$(".btn1>img").attr("src","images/gameBtn3.png");
+				}
+			}else{
+				layerHide();
+			}
+			
+			pTime+=1;
+			$("#pTime").text(pTime)
+		});
+		$(".btn2").click(function(){
+			score=parseInt($("#score").text());
+			layerShow();
+			$(".banker0").fadeOut(500);
+			setTimeout(function(){
+				$(".banker1").fadeIn(300);
+				$(".chip1").text(bn);
+			},500);
+			setTimeout(function(){
+				if(bn<=21&&pn<=21){
+					if(bn==pn){//如果庄家和玩家点数一样
+						score+=5;
+						$("#score").text(score);
+						$(".draw").fadeIn(500);
+						setTimeout(function(){
+							$(".snum1").show();
+							$(".snum1").animate({"opacity":"1"},800).animate({"opacity":"0"},700);
+							setTimeout(function(){
+								$(".snum1").hide();
+							},1500);
+						},500);
+					}else if(bn<pn){//如果庄家点数小于玩家
+						score+=10;
+						$("#score").text(score);
+						$(".win").fadeIn(500);
+						setTimeout(function(){
+							$(".snum2").show();
+							$(".snum2").animate({"opacity":"1"},800).animate({"opacity":"0"},700);
+							setTimeout(function(){
+								$(".snum2").hide();
+							},1500);
+						},500);
+					}else{//如果庄家点数大于玩家
+						$(".lose").fadeIn(500);
+					}
+				}else if(bn<=21&&pn>21){
+					$(".lose").fadeIn(500);
+				}else if(bn>21&&pn<=21){
+					score+=10;
+					$("#score").text(score);
+					$(".win").fadeIn(500);
+					setTimeout(function(){
+						$(".snum2").show();
+						$(".snum2").animate({"opacity":"1"},800).animate({"opacity":"0"},700);
+						setTimeout(function(){
+							$(".snum2").hide();
+						},1500);
+					},500);
+				}else if(bn>21&&pn>21){
+					score+=5;
+					$("#score").text(score);
+					$(".draw").fadeIn(500);
+					setTimeout(function(){
+						$(".snum1").show();
+						$(".snum1").animate({"opacity":"1"},800).animate({"opacity":"0"},700);
+						setTimeout(function(){
+							$(".snum1").hide();
+						},1500);
+					},500);
+				}
+				$(".goBtn").css("display","block").fadeIn(500);
+				$(".goBack").css("display","block").fadeIn(500);
+				//此处数据库录入玩家积分
+			},1000);
+		});
+		$(".goBtn").click(function(){
+			$(".final").hide();
+			$(".goBtn").hide();
+			$(".goBack").hide();
+			if(score<5){
+				$(".shade").show();
+				if(isScore==0){
+					$(".window2").show();
+					score+=5;
+					$("#score").text(score);
+				}else{
+					$(".window3").show();
+				}
+			}else{
+				window.location.href="game.html";
+			}
+		});
+		$(".close").click(function(){
+			window.location.href="index.html";
+		});
+	</script>
+</body>
+</html>
